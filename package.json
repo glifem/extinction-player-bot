@@ -1,0 +1,56 @@
+{
+	"name": "extinction-player-bot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "tsc && node dist/index.js",
+		"dev": "tsc --watch",
+		"lint": "eslint --fix */**/*.{js,ts,tsx}",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/glifem/extinction-player-bot.git"
+	},
+	"author": "GLife Studios",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/glifem/extinction-player-bot/issues"
+	},
+	"homepage": "https://github.com/glifem/extinction-player-bot#readme",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"discord-akairo": "^8.1.0",
+		"discord.js": "^12.5.1",
+		"dotenv": "^8.2.0"
+	},
+	"devDependencies": {
+		"@types/dotenv": "^8.2.0",
+		"@types/node": "^14.14.22",
+		"@typescript-eslint/eslint-plugin": "^4.14.1",
+		"@typescript-eslint/parser": "^4.14.1",
+		"eslint": "^7.19.0",
+		"eslint-config-airbnb-typescript": "^12.0.0",
+		"eslint-config-node": "^4.1.0",
+		"eslint-config-prettier": "^7.2.0",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"husky": "^4.3.8",
+		"jest": "^26.6.3",
+		"lint-staged": "^10.5.3",
+		"prettier": "^2.2.1",
+		"typescript": "^4.1.3"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx}": [
+			"eslint --fix"
+		]
+	}
+}
