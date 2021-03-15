@@ -35,11 +35,21 @@ export default class ExtinctionStatsCommand extends Command {
 
 		const { prefix } = this.client.discord
 		let args = msg.content.slice(prefix.length).trim().split(/ +/g);
+		if (!args[1])
+		{
+			msg.channel.send(`Usage : ${prefix}time [CharID/Name]`);
+			return;
+		}
 		(async () => {
 			var options = {
 				uri: `https://api.gtaliferp.fr:8443/v1/extinction/profiles/main/${args[1]}`,
 			};
 			const result = await request.get(options);
+			if(result.startsWith(`{"error"`))
+			{
+				msg.channel.send("ID Not found.");
+				return;
+			}
 			//const result = getExtinctionProfileWithCharacterId("77913");
 			let list = JSON.parse(result);
 			let time = foundstats(list, "played_time");
@@ -59,7 +69,7 @@ export default class ExtinctionStatsCommand extends Command {
 				.setColor("BLUE")
 				.addField("Character", list.name, true)
 				.addField("Playtime", wDisplay + dDisplay + hDisplay + mDisplay + sDisplay, true)
-			if (msg.util) msg.util.send(embed);
+			msg.channel.send(embed);
 		})()
 	}
 }

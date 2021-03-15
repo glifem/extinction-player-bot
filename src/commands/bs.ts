@@ -37,15 +37,23 @@ export default class ExtinctionStatsCommand extends Command {
 
 		const { prefix } = this.client.discord
 		let args = msg.content.slice(prefix.length).trim().split(/ +/g);
+		if (!args[1])
+		{
+			msg.channel.send(`Usage : ${prefix}bs [name]`);
+			return;
+		}
         (async () => {
         var options = {
             uri: `https://api.gtaliferp.fr:8443/v1/extinction/profiles/main/${args[1]}`,
         };
         const result = await request.get(options);
         //const result = getExtinctionProfileWithCharacterId("77913");
-        console.log(result)
+        if(result.startsWith(`{"error"`))
+        {
+            msg.channel.send("ID Not found.");
+            return;
+        }
         let list = JSON.parse(result);
-        console.log(list)
         imageCreation.createStatsCard(
             {
                 name: list.name,
