@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { MessageAttachment, Message } from 'discord.js';
 import * as request from "request-promise-native";
-
+import * as Api from "../client/Api";
 
 import { imageCreation } from '../utils/imageCreation';
 
@@ -35,11 +35,14 @@ export default class ExtinctionStatsCommand extends Command {
 
     public exec(msg: Message, { command }: { command: Command }): void {
 
+		const { prefix } = this.client.discord
+		let args = msg.content.slice(prefix.length).trim().split(/ +/g);
         (async () => {
         var options = {
-            uri: "https://api.gtaliferp.fr:8443/v1/extinction/profiles/main/77913",
+            uri: `https://api.gtaliferp.fr:8443/v1/extinction/profiles/main/${args[1]}`,
         };
         const result = await request.get(options);
+        //const result = getExtinctionProfileWithCharacterId("77913");
         console.log(result)
         let list = JSON.parse(result);
         console.log(list)
@@ -61,7 +64,7 @@ export default class ExtinctionStatsCommand extends Command {
             (error: any, buffer: any) => {
                 if (error) throw error;
                 const attachment = new MessageAttachment(buffer, 'image.png');
-                if (msg.util) msg.util.send('Hello', attachment);
+                if (msg.util) msg.util.send(attachment);
             }
         );
     })()
