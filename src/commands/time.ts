@@ -39,14 +39,11 @@ export default class ExtinctionStatsCommand extends Command {
 			};
 			const result = await request.get(options);
 			//const result = getExtinctionProfileWithCharacterId("77913");
-			console.log(result)
 			let list = JSON.parse(result);
-			console.log(list)
 			let time = foundstats(list, "played_time");
 			var w = Math.floor(time / (3600 * 24 * 7));
 			var d = Math.floor(time / (3600 * 24) - (w * 7));
 			var h = Math.floor((time - w * 3600 * 24 * 7 - d * 3600 * 24) % (3600 * 24) / 3600);
-			console.log(h)
 			var m = Math.floor(time % 3600 / 60);
 			var s = Math.floor(time % 60);
 			var wDisplay = w > 0 ? w + "w " : "";
@@ -55,7 +52,7 @@ export default class ExtinctionStatsCommand extends Command {
 			var mDisplay = m > 0 ? m + "m " : "";
 			var sDisplay = s > 0 ? s + "s " : "";
 			let embed = new MessageEmbed()
-				.setAuthor("Message Author ?")
+				.setAuthor(msg.author.tag)
 				.setTitle("Time")
 				.setColor("BLUE")
 				.addField("Character", list.name, true)
