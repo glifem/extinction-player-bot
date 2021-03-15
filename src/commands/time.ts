@@ -13,7 +13,7 @@ function foundstats(list: any, name: any) {
 	return ("N/A");
 }
 
-export default class ExtinctionStatsCommand extends Command {
+export default class ExtinctionTimeCommand extends Command {
 	public constructor() {
 		super('time', {
 			aliases: ['time'],
